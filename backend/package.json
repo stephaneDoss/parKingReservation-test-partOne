@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "api for parking reservation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Horusbj/parkingReservation-test_technique_partOne.git"
+  },
+  "author": "stephane dossou s.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Horusbj/parkingReservation-test_technique_partOne/issues"
+  },
+  "homepage": "https://github.com/Horusbj/parkingReservation-test_technique_partOne#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.40"
+  }
+}

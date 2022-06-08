@@ -1,6 +1,12 @@
 const express = require("express");
+const connectDB = require("./config/db");
+const dotenv = require("dotenv");
+const Parking = require("./models/parkingModel");
 
+dotenv.config();
 const app = express();
+connectDB();
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -13,28 +19,25 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use("/api/stuff", (req, res, next) => {
-  const stuff = [
-    {
-      _id: "oeihfzeoi",
-      title: "Mon premier objet",
-      description: "Les infos de mon premier objet",
-      imageUrl:
-        "https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg",
-      price: 4900,
-      userId: "qsomihvqios",
-    },
-    {
-      _id: "oeihfzeomoihi",
-      title: "Mon deuxième objet",
-      description: "Les infos de mon deuxième objet",
-      imageUrl:
-        "https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg",
-      price: 2900,
-      userId: "qsomihvqios",
-    },
-  ];
-  res.status(200).json(stuff);
+app.post("/api/parking", (req, res, next) => {
+  console.log(req.body);
+  const parking = new Parking({
+    ...req.body,
+  });
+  parking
+    .save()
+    .then(() => res.status(201).json({ message: "Objet enregistré !" }))
+    .catch((error) => res.status(400).json({ error }));
+});
+app.use("/api/parking", (req, res, next) => {
+  Parking.find()
+    .then((parkings) => res.status(200).json(parkings))
+    .catch((error) => res.status(400).json({ error }));
+});
+app.get("/api/parking/:id", (req, res, next) => {
+  Thing.findOne({ _id: req.params.id })
+    .then((thing) => res.status(200).json(thing))
+    .catch((error) => res.status(404).json({ error }));
 });
 
 module.exports = app;

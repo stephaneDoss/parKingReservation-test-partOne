@@ -9,14 +9,6 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    // const conn = await mongoose.connect(
-    //   "mongodb+srv://steph23:0000@cluster0.93y3j9u.mongodb.net/?retryWrites=true&w=majority",
-    //   {
-    //     useNewUrlParser: true,
-    //     useUnifiedTopology: true,
-    //   }
-    // );
-
     console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
   } catch (error) {
     console.log(`Error: ${error.message}`.red.bold);

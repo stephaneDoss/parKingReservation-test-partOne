@@ -1,7 +1,8 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
-const Parking = require("./models/parkingModel");
+var bodyParser = require("body-parser");
+const parkingRoutes = require("./routes/parkingRoutes");
 
 dotenv.config();
 const app = express();
@@ -19,25 +20,9 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.post("/api/parking", (req, res, next) => {
-  console.log(req.body);
-  const parking = new Parking({
-    ...req.body,
-  });
-  parking
-    .save()
-    .then(() => res.status(201).json({ message: "Objet enregistré !" }))
-    .catch((error) => res.status(400).json({ error }));
-});
-app.use("/api/parking", (req, res, next) => {
-  Parking.find()
-    .then((parkings) => res.status(200).json(parkings))
-    .catch((error) => res.status(400).json({ error }));
-});
-app.get("/api/parking/:id", (req, res, next) => {
-  Thing.findOne({ _id: req.params.id })
-    .then((thing) => res.status(200).json(thing))
-    .catch((error) => res.status(404).json({ error }));
-});
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use("/parking", parkingRoutes);
 
 module.exports = app;

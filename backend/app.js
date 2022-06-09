@@ -3,6 +3,8 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 var bodyParser = require("body-parser");
 const parkingRoutes = require("./routes/parkingRoutes");
+const reservationRoutes = require("./routes/reservationRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
 const app = express();
@@ -24,5 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/parking", parkingRoutes);
+app.use("/reservation", reservationRoutes);
+app.use("/user", userRoutes);
 
 module.exports = app;

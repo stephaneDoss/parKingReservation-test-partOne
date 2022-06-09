@@ -5,7 +5,6 @@ var bodyParser = require("body-parser");
 const parkingRoutes = require("./routes/parkingRoutes");
 const reservationRoutes = require("./routes/reservationRoutes");
 const userRoutes = require("./routes/userRoutes");
-
 dotenv.config();
 const app = express();
 connectDB();
@@ -27,6 +26,5 @@ app.use(bodyParser.json());
 
 app.use("/parking", parkingRoutes);
 app.use("/reservation", reservationRoutes);
-app.use("/user", userRoutes);
-
+app.use("/auth", userRoutes);
 module.exports = app;
